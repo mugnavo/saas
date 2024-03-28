@@ -36,6 +36,5 @@ Auth providers:
 Payment gateways:
 
 - [ ] Xendit
-- [ ] Stripe
-- [ ] PayPal (?)
+- [ ] PayPal
 - [ ] Maya (?)
