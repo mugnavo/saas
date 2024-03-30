@@ -1,6 +1,7 @@
 import { DrizzlePostgreSQLAdapter } from "@lucia-auth/adapter-drizzle";
 import { Lucia, type Session, type User } from "lucia";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { cache } from "react";
 
 import { Facebook, GitHub, Google } from "arctic";
@@ -74,3 +75,16 @@ export const validateRequest = cache(
     return result;
   }
 );
+
+/**
+ * Redirects the user based on their authentication status
+ *
+ * @param { boolean } authenticated - If the user is authenticated
+ * @param { string } redirectTo - The path to redirect to
+ */
+export async function redirectIfAuth(authenticated: boolean, redirectTo: string) {
+  const { user } = await validateRequest();
+  if (authenticated === !!user) {
+    return redirect(redirectTo);
+  }
+}

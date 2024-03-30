@@ -3,7 +3,7 @@ import { and, eq } from "drizzle-orm";
 import { generateId } from "lucia";
 import { cookies } from "next/headers";
 
-import { facebook, lucia } from "~/lib/auth";
+import { facebook, lucia, redirectIfAuth } from "~/lib/auth";
 import { db } from "~/lib/db";
 import { oauthAccounts, users } from "~/lib/schema";
 
@@ -30,6 +30,8 @@ export async function GET(request: Request): Promise<Response> {
       status: 400,
     });
   }
+
+  await redirectIfAuth(true, "/dashboard");
 
   try {
     const tokens = await facebook.validateAuthorizationCode(code);
