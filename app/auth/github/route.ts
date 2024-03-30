@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 
 import { github } from "~/lib/auth";
 
-export async function GET() {
+export async function GET(): Promise<Response> {
   const state = generateState();
 
   const url = await github.createAuthorizationURL(state, { scopes: ["user:email"] });
