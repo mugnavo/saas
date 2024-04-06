@@ -1,4 +1,5 @@
 {
+  // hide misc files that we most likely don't need to see
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -19,6 +20,28 @@
     ".prettierrc": true,
     "postcss.config.js": true
   },
+
+  // always choose typescript from node_modules
   "typescript.tsdk": "./node_modules/typescript/lib",
-  "files.eol": "\n"
+
+  // use LF line endings
+  "files.eol": "\n",
+
+  // more readable tabs
+  "workbench.editor.customLabels.patterns": {
+    "**/app/**/page.tsx": "${dirname}/page.${extname}",
+    "**/app/**/layout.tsx": "${dirname}/layout.${extname}"
+  },
+
+  // smol performance improvements
+  "editor.minimap.renderCharacters": false,
+
+  // set prettier as default formatter for json, ts, tsx, js, jsx, html, css
+  "[json][jsonc][typescript][typescriptreact][javascript][javascriptreact][html][css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // auto-format on save & paste
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true
 }
