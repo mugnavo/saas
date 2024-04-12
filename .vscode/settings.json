@@ -18,7 +18,7 @@
     ".eslintrc.json": true,
     ".gitattributes": true,
     ".prettierrc": true,
-    "postcss.config.js": true
+    "postcss.config.mjs": true
   },
 
   // always choose typescript from node_modules
