@@ -21,7 +21,7 @@ Core:
 
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/) + optional [DaisyUI v4](https://daisyui.com/components/)
-- [Drizzle ORM](https://orm.drizzle.team/) + PostgreSQL (currently [Vercel Postgres](https://vercel.com/storage/postgres))
+- [Drizzle ORM](https://orm.drizzle.team/) + PostgreSQL
 - [Lucia](https://lucia-auth.com/)
 - [pnpm](https://pnpm.io/)
 - [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)
