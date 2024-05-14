@@ -7,6 +7,10 @@ export const users = pgTable("users", {
   lastName: text("last_name"),
   avatarUrl: text("avatar_url"),
   email: text("email").unique().notNull(),
+
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  setupAt: timestamp("setup_at"),
+  termsAcceptedAt: timestamp("terms_accepted_at"),
 });
 
 export const oauthAccounts = pgTable(
@@ -33,8 +37,5 @@ export const sessions = pgTable("sessions", {
 });
 
 // TODO: tables for payment gateways
-
-type Expand<T> = T extends unknown ? { [K in keyof T]: T[K] } : never;
-type MakeOptional<T, K extends keyof T> = Expand<Omit<T, K> & Partial<Pick<T, K>>>;
 
 export type User = typeof users.$inferSelect;
