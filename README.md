@@ -1,4 +1,4 @@
-# Mugnavo SaaS
+# mugnavo/saas
 
 Starter kit for SaaS applications.
 
@@ -36,5 +36,4 @@ Auth providers:
 Payment gateways:
 
 - [ ] Xendit
-- [ ] PayPal
-- [ ] Maya (?)
+- [ ] Stripe
