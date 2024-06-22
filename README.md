@@ -9,7 +9,7 @@ Starter kit for SaaS applications.
 >
 > TODO:
 >
-> - Starter pages & dashboard styled with DaisyUI
+> - Starter pages & dashboard styled with shadcn/ui
 > - Payment gateways (see below)
 > - Email & SMS providers
 > - Logging
@@ -20,7 +20,7 @@ Starter kit for SaaS applications.
 Core:
 
 - [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/) + optional [DaisyUI v4](https://daisyui.com/components/)
+- [Tailwind CSS](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
 - [Drizzle ORM](https://orm.drizzle.team/) + PostgreSQL
 - [Lucia](https://lucia-auth.com/)
 - [pnpm](https://pnpm.io/)
