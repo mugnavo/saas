@@ -1,6 +1,6 @@
 import { OAuth2RequestError } from "arctic";
 import { and, eq } from "drizzle-orm";
-import { generateId } from "lucia";
+import { generateIdFromEntropySize } from "lucia";
 import { cookies } from "next/headers";
 
 import { google, lucia, redirectIfAuth } from "~/lib/server/auth";
@@ -68,7 +68,7 @@ export async function GET(request: Request): Promise<Response> {
       });
     }
 
-    const userId = generateId(15);
+    const userId = generateIdFromEntropySize(10); // 16 characters
 
     await db.transaction(async (tx) => {
       await tx.insert(users).values({
