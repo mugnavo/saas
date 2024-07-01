@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 import { github, lucia, redirectIfAuth } from "~/lib/server/auth";
 import { db } from "~/lib/server/db";
-import { oauthAccounts, users } from "~/lib/server/schema";
+import { oauthAccount, user } from "~/lib/server/schema";
 
 interface GitHubUser {
   id: string;
@@ -40,10 +40,10 @@ export async function GET(request: Request): Promise<Response> {
     });
     const githubUser: GitHubUser = await githubUserResponse.json();
 
-    const existingUser = await db.query.oauthAccounts.findFirst({
+    const existingUser = await db.query.oauthAccount.findFirst({
       where: and(
-        eq(oauthAccounts.providerId, "github"),
-        eq(oauthAccounts.providerUserId, githubUser.id)
+        eq(oauthAccount.providerId, "github"),
+        eq(oauthAccount.providerUserId, githubUser.id)
       ),
     });
 
@@ -68,14 +68,14 @@ export async function GET(request: Request): Promise<Response> {
     const userId = generateIdFromEntropySize(10); // 16 characters
 
     await db.transaction(async (tx) => {
-      await tx.insert(users).values({
+      await tx.insert(user).values({
         id: userId,
         email: githubUser.email,
         name: githubUser.name || githubUser.login,
         avatarUrl: githubUser.avatar_url,
       });
       await tx
-        .insert(oauthAccounts)
+        .insert(oauthAccount)
         .values({ providerId: "github", providerUserId: githubUser.id, userId });
     });
 

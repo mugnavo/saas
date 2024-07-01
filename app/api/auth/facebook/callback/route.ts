@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 import { facebook, lucia, redirectIfAuth } from "~/lib/server/auth";
 import { db } from "~/lib/server/db";
-import { oauthAccounts, users } from "~/lib/server/schema";
+import { oauthAccount, user } from "~/lib/server/schema";
 
 interface FacebookUser {
   id: string;
@@ -44,10 +44,10 @@ export async function GET(request: Request): Promise<Response> {
     const response = await fetch(url);
     const facebookUser: FacebookUser = await response.json();
 
-    const existingUser = await db.query.oauthAccounts.findFirst({
+    const existingUser = await db.query.oauthAccount.findFirst({
       where: and(
-        eq(oauthAccounts.providerId, "facebook"),
-        eq(oauthAccounts.providerUserId, facebookUser.id)
+        eq(oauthAccount.providerId, "facebook"),
+        eq(oauthAccount.providerUserId, facebookUser.id)
       ),
     });
 
@@ -72,7 +72,7 @@ export async function GET(request: Request): Promise<Response> {
     const userId = generateIdFromEntropySize(10); // 16 characters
 
     await db.transaction(async (tx) => {
-      await tx.insert(users).values({
+      await tx.insert(user).values({
         id: userId,
         email: facebookUser.email,
         name: facebookUser.name,
@@ -81,7 +81,7 @@ export async function GET(request: Request): Promise<Response> {
         avatarUrl: facebookUser.picture.data.url,
       });
       await tx
-        .insert(oauthAccounts)
+        .insert(oauthAccount)
         .values({ providerId: "facebook", providerUserId: facebookUser.id, userId });
     });
 

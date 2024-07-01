@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 import { google, lucia, redirectIfAuth } from "~/lib/server/auth";
 import { db } from "~/lib/server/db";
-import { oauthAccounts, users } from "~/lib/server/schema";
+import { oauthAccount, user } from "~/lib/server/schema";
 
 interface GoogleUser {
   sub: string;
@@ -43,10 +43,10 @@ export async function GET(request: Request): Promise<Response> {
     });
     const googleUser: GoogleUser = await response.json();
 
-    const existingUser = await db.query.oauthAccounts.findFirst({
+    const existingUser = await db.query.oauthAccount.findFirst({
       where: and(
-        eq(oauthAccounts.providerId, "google"),
-        eq(oauthAccounts.providerUserId, googleUser.sub)
+        eq(oauthAccount.providerId, "google"),
+        eq(oauthAccount.providerUserId, googleUser.sub)
       ),
     });
 
@@ -71,7 +71,7 @@ export async function GET(request: Request): Promise<Response> {
     const userId = generateIdFromEntropySize(10); // 16 characters
 
     await db.transaction(async (tx) => {
-      await tx.insert(users).values({
+      await tx.insert(user).values({
         id: userId,
         email: googleUser.email,
         name: googleUser.name,
@@ -80,7 +80,7 @@ export async function GET(request: Request): Promise<Response> {
         avatarUrl: googleUser.picture,
       });
       await tx
-        .insert(oauthAccounts)
+        .insert(oauthAccount)
         .values({ providerId: "google", providerUserId: googleUser.sub, userId });
     });
 

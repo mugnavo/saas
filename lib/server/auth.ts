@@ -7,9 +7,13 @@ import { cache } from "react";
 import { Facebook, GitHub, Google } from "arctic";
 
 import { db } from "./db";
-import { sessions, users, type User as DatabaseUser } from "./schema";
+import {
+  session as sessionTable,
+  user as userTable,
+  type User as DatabaseUser,
+} from "./schema";
 
-const adapter = new DrizzlePostgreSQLAdapter(db, sessions, users);
+const adapter = new DrizzlePostgreSQLAdapter(db, sessionTable, userTable);
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {

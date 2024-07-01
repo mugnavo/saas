@@ -1,6 +1,6 @@
 import { pgTable, primaryKey, text, timestamp } from "drizzle-orm/pg-core";
 
-export const users = pgTable("users", {
+export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name"),
   firstName: text("first_name"),
@@ -13,23 +13,23 @@ export const users = pgTable("users", {
   termsAcceptedAt: timestamp("terms_accepted_at"),
 });
 
-export const oauthAccounts = pgTable(
-  "oauth_accounts",
+export const oauthAccount = pgTable(
+  "oauth_account",
   {
     providerId: text("provider_id"),
     providerUserId: text("provider_user_id"),
     userId: text("user_id")
       .notNull()
-      .references(() => users.id),
+      .references(() => user.id),
   },
   (table) => ({ pk: primaryKey({ columns: [table.providerId, table.providerUserId] }) })
 );
 
-export const sessions = pgTable("sessions", {
+export const session = pgTable("session", {
   id: text("id").primaryKey(),
   userId: text("user_id")
     .notNull()
-    .references(() => users.id),
+    .references(() => user.id),
   expiresAt: timestamp("expires_at", {
     withTimezone: true,
     mode: "date",
@@ -38,4 +38,4 @@ export const sessions = pgTable("sessions", {
 
 // TODO: tables for payment gateways
 
-export type User = typeof users.$inferSelect;
+export type User = typeof user.$inferSelect;
