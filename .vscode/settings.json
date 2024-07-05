@@ -31,7 +31,9 @@
   "workbench.editor.customLabels.patterns": {
     "**/app/**/page.tsx": "${dirname}/page.${extname}",
     "**/app/**/layout.tsx": "${dirname}/layout.${extname}",
-    "**/app/**/route.ts": "${dirname}/route.${extname}"
+    "**/app/**/route.ts": "${dirname}/route.${extname}",
+
+    "**/lib/**/*.ts": "${dirname}/${filename}.${extname}"
   },
 
   // smol performance improvements

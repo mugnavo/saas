@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-import { lucia, validateRequest } from "~/lib/server/auth";
+import { lucia, validateRequest } from "~/lib/auth";
 
 export async function GET() {
   const { session } = await validateRequest();

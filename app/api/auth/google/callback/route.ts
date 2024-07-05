@@ -3,9 +3,9 @@ import { and, eq } from "drizzle-orm";
 import { generateIdFromEntropySize } from "lucia";
 import { cookies } from "next/headers";
 
-import { google, lucia, redirectIfAuth } from "~/lib/server/auth";
-import { db } from "~/lib/server/db";
-import { oauthAccount, user } from "~/lib/server/schema";
+import { google, lucia, redirectIfAuth } from "~/lib/auth";
+import { db } from "~/lib/db";
+import { oauthAccount, user } from "~/lib/db/schema";
 
 interface GoogleUser {
   sub: string;

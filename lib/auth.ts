@@ -6,12 +6,12 @@ import { cache } from "react";
 
 import { Facebook, GitHub, Google } from "arctic";
 
-import { db } from "./db";
+import { db } from "~/lib/db";
 import {
   session as sessionTable,
   user as userTable,
   type User as DatabaseUser,
-} from "./schema";
+} from "~/lib/db/schema";
 
 const adapter = new DrizzlePostgreSQLAdapter(db, sessionTable, userTable);
 
