@@ -36,7 +36,7 @@ export async function GET(request: Request): Promise<Response> {
   try {
     const tokens = await facebook.validateAuthorizationCode(code);
     const url = new URL("https://graph.facebook.com/me");
-    url.searchParams.set("access_token", tokens.accessToken);
+    url.searchParams.set("access_token", tokens.accessToken());
     url.searchParams.set(
       "fields",
       ["id", "name", "first_name", "last_name", "picture", "email"].join(",")
