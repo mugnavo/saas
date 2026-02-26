@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> Deprecated, check out https://github.com/mugnavo/tanstarter instead
+
 # mugnavo/next-starter
 
 Minimal Next.js starter based on [dotnize/react-tanstarter](https://github.com/dotnize/react-tanstarter).
